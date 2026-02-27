@@ -1,4 +1,7 @@
-<app-kanban-board
+<app-dynamic-table
   [columns]="columns"
-  (taskMoved)="onTaskMoved($event)">
-</app-kanban-board>
+  [fetchFn]="fetchUsers"
+  [showActions]="true"
+  (edit)="onEdit($event)"
+  (delete)="onDelete($event)">
+</app-dynamic-table>
