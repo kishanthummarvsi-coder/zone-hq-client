@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { KanbanColumnModel } from '../../../../shared/components/kanban/models/kanban.model';
+import { Component, OnInit } from '@angular/core';
 import { TableColumn } from '../../../../shared/models/table-column.model';
 import { UserService } from '../../services/user-service';
 import { Router } from '@angular/router';
@@ -14,7 +13,7 @@ import { User } from '../../models/user.model';
   templateUrl: './user-list.html',
   styleUrl: './user-list.scss',
 })
-export class UserList {
+export class UserList implements OnInit {
 
   columns: TableColumn[] = [
     { key: 'id', label: 'ID', sortable: true },
@@ -28,10 +27,14 @@ export class UserList {
   constructor(
     private userService: UserService,
     private router: Router
-  ) {}
-
-  fetchUsers = (request: PagedRequest): Observable<PagedResponse<User>> => {
-    return this.userService.getPaged(request);
+  ) { }
+ 
+  ngOnInit(): void {
+    this.fetchUsers();
+  }
+  
+  fetchUsers = () => {
+    return this.userService.getAll();
   };
 
   onEdit(user: User) {
