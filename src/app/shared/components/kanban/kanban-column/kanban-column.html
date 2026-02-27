@@ -1,53 +1,26 @@
-<!-- <div class="kanban-column">
+<mat-card class="kanban-column">
 
   <div class="column-header">
-    <h3>{{ column.title }}</h3>
-    <span class="count">{{ column.tasks.length }}</span>
-  </div>
-
-  <div
-    class="column-body"
-    cdkDropList
-    [cdkDropListData]="column.tasks"
-    (cdkDropListDropped)="onDrop($event)"
-  >
-
-    <app-kanban-card
-      *ngFor="let task of column.tasks"
-      [task]="task"
-      cdkDrag>
-    </app-kanban-card>
-
-  </div>
-
-</div> -->
-
-
-<mat-card class="kanban-column mat-elevation-z2">
-
-  <div class="column-header">
-    <div class="title">
-      {{ column.title }}
+    <div class="header-left">
+      <span class="title">{{ column.title }}</span>
+      <span class="task-count">
+        {{ column.tasks.length }}
+      </span>
     </div>
 
-    <span class="task-count">
-      {{ column.tasks.length }}
-    </span>
+    <button mat-icon-button class="menu-btn">
+      <mat-icon>more_vert</mat-icon>
+    </button>
   </div>
 
-  <div
-    class="column-body"
-    cdkDropList
-    [id]="'cdk-drop-' + column.id"
-    [cdkDropListData]="column.tasks"
-    [cdkDropListConnectedTo]="connectedDropLists"
-    (cdkDropListDropped)="onDrop($event)"
-  >
+  <div class="column-body" cdkDropList [id]="'cdk-drop-' + column.id" [cdkDropListData]="column.tasks"
+    [cdkDropListConnectedTo]="connectedDropLists" (cdkDropListDropped)="onDrop($event)">
 
-    <app-kanban-card
-      *ngFor="let task of column.tasks"
-      [task]="task"
-      cdkDrag>
+    <div *ngIf="column.tasks.length === 0" class="empty-state">
+      Drop tasks here
+    </div>
+
+    <app-kanban-card *ngFor="let task of column.tasks" [task]="task" cdkDrag>
     </app-kanban-card>
 
   </div>

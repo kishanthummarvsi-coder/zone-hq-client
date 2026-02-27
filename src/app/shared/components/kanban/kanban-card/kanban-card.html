@@ -1,25 +1,45 @@
-<!-- <div class="kanban-card" mat-card>
+<mat-card class="kanban-card mat-elevation-z1" cdkDrag>
 
-  <div class="card-title">
-    {{ task.title }}
+  <!-- Status Strip -->
+  <div class="status-strip" [ngClass]="task.priority"></div>
+
+  <!-- Header -->
+  <div class="card-header">
+    <div class="header-left">
+      <mat-icon class="task-icon">task</mat-icon>
+      <div class="card-title">
+        {{ task.title }}
+      </div>
+    </div>
+
+    <button mat-icon-button class="menu-btn">
+      <mat-icon>more_vert</mat-icon>
+    </button>
   </div>
 
+  <!-- Description -->
   <div class="card-description" *ngIf="task.description">
     {{ task.description }}
   </div>
 
-</div> -->
+  <!-- Footer -->
+  <div class="card-footer">
 
+    <div class="left-meta">
+      <span class="priority-chip" [ngClass]="task.priority">
+        {{ task.priority | titlecase }}
+      </span>
 
+      <div class="due-date" *ngIf="task.dueDate">
+        <mat-icon>schedule</mat-icon>
+        {{ task.dueDate | date:'MMM d' }}
+      </div>
+    </div>
 
-<mat-card class="kanban-card mat-elevation-z1">
+    <div class="assignee" *ngIf="task.assignee">
+      <img [src]="task.assignee.avatar" alt="user">
+    </div>
 
-  <div class="card-title">
-    {{ task.title }}
-  </div>
-
-  <div class="card-description" *ngIf="task.description">
-    {{ task.description }}
   </div>
 
 </mat-card>

@@ -1,8 +1,18 @@
 export interface KanbanTaskModel {
-  id: string;
+  id: number;
   title: string;
   description?: string;
-  status: string;
+
+  status: 'todo' | 'progress' | 'done';
+
+  priority?: 'high' | 'medium' | 'low';
+  dueDate?: Date;
+
+  assignee?: {
+    id: number;
+    name: string;
+    avatar: string;
+  };
 }
 
 export interface KanbanColumnModel {

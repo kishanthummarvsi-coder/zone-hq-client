@@ -9,29 +9,29 @@ import { KanbanColumnModel } from '../../../../shared/components/kanban/models/k
 })
 export class UserList {
 
-  columns: KanbanColumnModel[] = [
-    {
-      id: 'todo',
-      title: 'Todo',
-      tasks: [
-        { id: '1', title: 'Create USer API', status: 'todo' },
-        { id: '2', title: 'Design USer UI', status: 'todo' }
-      ]
-    },
-    {
-      id: 'progress',
-      title: 'In Progress',
-      tasks: [
-        { id: '3', title: 'Implement Validation', status: 'progress' },
-         { id: '', title: 'Design USer UI', status: 'todo' }
-      ]
-    },
-    {
-      id: 'done',
-      title: 'Done',
-      tasks: []
-    }
-  ];
+columns: KanbanColumnModel[] = [
+  {
+    id: 'todo',
+    title: 'Todo',
+    tasks: [
+      { id: 1, title: 'Create User API', status: 'todo' },
+      { id: 2, title: 'Design User UI', status: 'todo' }
+    ]
+  },
+  {
+    id: 'progress',
+    title: 'In Progress',
+    tasks: [
+      { id: 3, title: 'Implement Validation', status: 'progress' },
+      { id: 4, title: 'Improve UX Flow', status: 'progress' }
+    ]
+  },
+  {
+    id: 'done',
+    title: 'Done',
+    tasks: []
+  }
+];
 
   onTaskMoved(event: any) {
     console.log('Task moved:', event);
