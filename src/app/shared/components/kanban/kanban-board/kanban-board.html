@@ -1,0 +1,10 @@
+<div class="kanban-board" cdkDropListGroup>
+
+  <app-kanban-column
+    *ngFor="let column of columns"
+    [column]="column"
+     [connectedDropLists]="dropListIds"
+    (taskDropped)="drop($event)">
+  </app-kanban-column>
+
+</div>

@@ -1,0 +1,9 @@
+.kanban-board {
+  display: flex;
+  gap: 24px;
+  padding: 24px;
+  overflow-x: auto;
+  height: calc(100vh - 50px);
+
+  background: var(--mat-sys-surface-variant, #f5f6f8);
+}
