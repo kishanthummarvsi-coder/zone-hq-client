@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { KanbanColumnModel } from '../../../../shared/components/kanban/models/kanban.model';
+import { KanbanColumnModel } from '../../../../../shared/components/kanban/models/kanban.model';
 
 @Component({
   selector: 'app-role-list',

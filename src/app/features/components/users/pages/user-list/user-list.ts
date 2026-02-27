@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { TableColumn } from '../../../../shared/models/table-column.model';
-import { UserService } from '../../services/user-service';
+import { TableColumn } from '../../../../../shared/models/table-column.model';
 import { Router } from '@angular/router';
-import { PagedRequest } from '../../../../shared/models/paged-request.model';
+import { PagedRequest } from '../../../../../shared/models/paged-request.model';
 import { Observable } from 'rxjs';
-import { PagedResponse } from '../../../../shared/models/paged-response.model';
-import { User } from '../../models/user.model';
+import { PagedResponse } from '../../../../../shared/models/paged-response.model';
+import { UserService } from '../../../../services/user-service';
+import { User } from '../../../../models/users/user.model';
 
 @Component({
   selector: 'app-user-list',

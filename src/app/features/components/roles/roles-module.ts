@@ -5,7 +5,7 @@ import { RolesRoutingModule } from './roles-routing-module';
 import { RoleList } from './pages/role-list/role-list';
 import { RoleForm } from './pages/role-form/role-form';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SharedModule } from '../../shared/shared-module';
+import { SharedModule } from '../../../shared/shared-module';
 
 
 @NgModule({

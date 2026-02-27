@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { PagedRequest } from '../../../shared/models/paged-request.model';
-import { PagedResponse } from '../../../shared/models/paged-response.model';
 import { Observable, of } from 'rxjs';
-import { User } from '../models/user.model';
+import { User } from '../models/users/user.model';
+import { PagedRequest } from '../../shared/models/paged-request.model';
+import { PagedResponse } from '../../shared/models/paged-response.model';
 
 @Injectable({
   providedIn: 'root',

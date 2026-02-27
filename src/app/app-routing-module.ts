@@ -4,13 +4,13 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [{
     path: 'users',
     loadChildren: () =>
-      import('./features/users/users-module')
+      import('./features/components/users/users-module')
         .then(m => m.UsersModule)
   },
   {
     path: 'roles',
     loadChildren: () =>
-      import('./features/roles/roles-module')
+      import('./features/components/roles/roles-module')
         .then(m => m.RolesModule)
   }];
 
