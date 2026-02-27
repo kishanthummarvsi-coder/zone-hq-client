@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { KanbanColumnModel } from '../models/kanban.model';
+import { KanbanColumnModel } from '../../../models/kanban/kanban.model';
 
 @Component({
   selector: 'app-kanban-board',

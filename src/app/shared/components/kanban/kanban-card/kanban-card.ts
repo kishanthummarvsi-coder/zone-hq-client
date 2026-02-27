@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { KanbanTaskModel } from '../models/kanban.model';
+import { KanbanTaskModel } from '../../../models/kanban/kanban.model';
 
 @Component({
   selector: 'app-kanban-card',

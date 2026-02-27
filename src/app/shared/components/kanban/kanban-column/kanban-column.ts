@@ -1,6 +1,6 @@
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { KanbanColumnModel } from '../models/kanban.model';
+import { KanbanColumnModel } from '../../../models/kanban/kanban.model';
 
 @Component({
   selector: 'app-kanban-column',

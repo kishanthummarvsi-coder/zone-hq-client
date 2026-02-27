@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { TableColumn } from '../../models/table-column.model';
+import { TableColumn } from '../../models/dynamic-table/table-column.model';
 import { debounceTime, distinctUntilChanged, Observable } from 'rxjs';
 import { MatSort, Sort } from '@angular/material/sort';
 import { FormControl } from '@angular/forms';
