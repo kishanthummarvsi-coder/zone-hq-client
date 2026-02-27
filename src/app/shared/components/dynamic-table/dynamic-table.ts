@@ -23,7 +23,6 @@ export class DynamicTable<T> implements OnInit, AfterViewInit {
   data: T[] = [];
   displayedColumns: string[] = [];
 
-  searchControl = new FormControl('');
   loading = false;
 
   ngOnInit(): void {
@@ -34,7 +33,6 @@ export class DynamicTable<T> implements OnInit, AfterViewInit {
     }
 
     this.loadData();
-    this.setupSearch();
   }
 
   ngAfterViewInit(): void {
@@ -71,21 +69,5 @@ export class DynamicTable<T> implements OnInit, AfterViewInit {
       });
     });
   }
-
-  private setupSearch() {
-    this.searchControl.valueChanges
-      ?.pipe(
-        debounceTime(400),
-        distinctUntilChanged()
-      )
-      .subscribe(value => {
-        const searchValue = (value || '').toLowerCase();
-
-        this.data = this.data.filter((item: any) =>
-          Object.values(item).some(val =>
-            String(val).toLowerCase().includes(searchValue)
-          )
-        );
-      });
-  }
+ 
 }

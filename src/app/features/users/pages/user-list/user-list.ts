@@ -24,21 +24,30 @@ export class UserList implements OnInit {
     { key: 'status', label: 'Status', sortable: false }
   ];
 
+  request: PagedRequest = {
+    pageNumber: 1,
+    pageSize: 5
+  };
+
+  totalCount = 0;
+
   constructor(
     private userService: UserService,
     private router: Router
   ) { }
- 
-  ngOnInit(): void {
-    this.fetchUsers();
-  }
-  
-  fetchUsers = () => {
+
+  ngOnInit(): void { }
+
+  fetchUsers = (): Observable<User[]> => {
     return this.userService.getAll();
   };
 
+  onPageChange(event: any) {
+    this.request.pageNumber = event.pageNumber;
+    this.request.pageSize = event.pageSize;
+  }
+
   onEdit(user: User) {
-    // this.router.navigate(['/users/edit', user.id]);
     console.log('edit user', user);
   }
 

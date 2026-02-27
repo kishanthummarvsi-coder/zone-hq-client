@@ -26,7 +26,57 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
+
   getAll(): Observable<User[]> {
     return of(this.users); 
   }
+
+  getPaged(request: PagedRequest): Observable<PagedResponse<User>> {
+
+    let filtered = [...this.users];
+
+    // SEARCH
+    if (request.search) {
+      const search = request.search.toLowerCase();
+      filtered = filtered.filter(u =>
+        u.name.toLowerCase().includes(search) ||
+        u.email.toLowerCase().includes(search) ||
+        u.roleName.toLowerCase().includes(search)
+      );
+    }
+
+    // SORT
+    if (request.sortField) {
+      filtered.sort((a: any, b: any) => {
+        const valueA = a[request.sortField!];
+        const valueB = b[request.sortField!];
+
+        if (valueA < valueB) return request.sortDirection === 'asc' ? -1 : 1;
+        if (valueA > valueB) return request.sortDirection === 'asc' ? 1 : -1;
+        return 0;
+      });
+    }
+
+    const totalCount = filtered.length;
+
+    // PAGINATION
+    const start = (request.pageNumber - 1) * request.pageSize;
+    const end = start + request.pageSize;
+    const pagedData = filtered.slice(start, end);
+
+    return of({
+      items: pagedData,
+      totalCount: totalCount
+    });
+  }
+
+
+  // getPaged(request: PagedRequest): Observable<PagedResponse<User>> {
+  //   return this.http.post<PagedResponse<User>>(
+  //     `${this.baseUrl}/paged`,
+  //     request
+  //   );
+  // }
+
+
 }
