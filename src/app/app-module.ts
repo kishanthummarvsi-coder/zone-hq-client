@@ -14,8 +14,7 @@ import { LayoutModule } from '@angular/cdk/layout';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    LayoutModule
+    AppRoutingModule
   ],
   providers: [
     {
