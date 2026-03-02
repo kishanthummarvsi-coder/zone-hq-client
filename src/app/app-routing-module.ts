@@ -1,7 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [{
+const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'auth/login',
+    pathMatch: 'full'
+  },
+  {
+    path: 'auth',
+    loadChildren: () =>
+      import('./auth/auth-module')
+        .then(m => m.AuthModule)
+  },
+  {
     path: 'users',
     loadChildren: () =>
       import('./features/components/users/users-module')
@@ -12,7 +24,9 @@ const routes: Routes = [{
     loadChildren: () =>
       import('./features/components/roles/roles-module')
         .then(m => m.RolesModule)
-  }];
+  },
+  { path: '**', redirectTo: 'auth/login' }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

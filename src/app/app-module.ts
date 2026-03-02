@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './core/interceptors/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -13,6 +15,11 @@ import { App } from './app';
     AppRoutingModule
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
     provideBrowserGlobalErrorListeners(),
   ],
   bootstrap: [App]
