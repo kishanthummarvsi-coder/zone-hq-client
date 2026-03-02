@@ -1,12 +1,32 @@
 .header {
   display: flex;
+  align-items: center;
+  height: 60px;
+  padding: 0 16px;
+  background-color: #3f51b5;
+  color: #ffffff;
 }
 
 .title {
   margin-left: 12px;
   font-weight: 500;
+  font-size: 18px;
 }
 
 .spacer {
   flex: 1;
+}
+
+.icon-btn {
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-size: 22px;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.icon-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
 }
