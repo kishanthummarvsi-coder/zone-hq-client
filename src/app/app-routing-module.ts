@@ -18,7 +18,7 @@ const routes: Routes = [
   {
     path: '',
     component: MainLayoutComponent,
-    canActivate: [AuthGuard], 
+    canActivate: [AuthGuard],
     children: [
 
       {
@@ -37,21 +37,6 @@ const routes: Routes = [
 
     ]
   },
-
-  // {
-  //   path: 'users',
-  //   canActivate: [AuthGuard],
-  //   loadChildren: () =>
-  //     import('./features/components/users/users-module')
-  //       .then(m => m.UsersModule)
-  // },
-  // {
-  //   path: 'roles',
-  //   canActivate: [AuthGuard],
-  //   loadChildren: () =>
-  //     import('./features/components/roles/roles-module')
-  //       .then(m => m.RolesModule)
-  // },
   { path: '**', redirectTo: 'auth/login' }
 ];
 

@@ -26,6 +26,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatIconModule,
     MatListModule,
     MatButtonModule
+  ],
+  exports: [
+    MainLayoutComponent
   ]
 })
 export class LayoutModule { }
