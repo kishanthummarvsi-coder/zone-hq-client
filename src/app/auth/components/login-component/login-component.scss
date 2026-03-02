@@ -1,18 +1,47 @@
+$login-gradient-start: #8b8c8d;
+$login-gradient-end: #5c6bc0;
+
+$glass-bg: rgba(255, 255, 255, 0.1);
+$glass-border: rgba(255, 255, 255, 0.2);
+$glass-input-bg: rgba(255, 255, 255, 0.08);
+
+$text-primary: #1d1c1c;
+$text-secondary: rgba(39, 39, 39, 0.8);
+
+$input-border: rgba(255, 255, 255, 0.4);
+$icon-color: rgba(255, 255, 255, 0.8);
+
+$button-bg: rgba(255, 255, 255, 0.2);
+$button-hover-bg: rgba(255, 255, 255, 0.35);
+
+$card-shadow: rgba(0, 0, 0, 0.2);
+
 .login-wrapper {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 
-  background: linear-gradient(135deg, #8b8c8d, #5c6bc0);
+  background: linear-gradient(
+    135deg,
+    $login-gradient-start,
+    $login-gradient-end
+  );
 }
 
 .login-card {
   width: 400px;
   padding: 32px;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  background-color: transparent;
+  border-radius: 16px;
+
+  background: $glass-bg;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+
+  border: 1px solid $glass-border;
+  box-shadow: 0 15px 40px $card-shadow;
+
+  color: $text-primary;
 }
 
 .login-header {
@@ -22,11 +51,12 @@
   h2 {
     margin: 0;
     font-weight: 600;
+    color: $text-primary;
   }
 
   p {
     margin: 4px 0 0;
-    color: #666;
+    color: $text-secondary;
     font-size: 14px;
   }
 }
@@ -41,16 +71,49 @@
   width: 100%;
 }
 
-.btn-container{
-    display: flex;
-    justify-content: center;
-    background-color: transparent;
-    
-    .login-btn {
-        height: 45px;
-        font-size: 16px;
-        font-weight: 500;
-        width: 55px;
-        background-color: transparent;
-    }
+/* Material Override */
+::ng-deep .mat-mdc-form-field {
+  .mdc-text-field--outlined {
+    background: $glass-input-bg;
+    border-radius: 8px;
+  }
+
+  .mdc-notched-outline__leading,
+  .mdc-notched-outline__notch,
+  .mdc-notched-outline__trailing {
+    border-color: $input-border !important;
+  }
+
+  .mdc-floating-label,
+  .mat-mdc-input-element {
+    color: $text-primary !important;
+  }
+
+  .mat-icon {
+    color: $icon-color;
+  }
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.login-btn {
+  height: 45px;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 500;
+
+  background: $button-bg;
+  color: $text-primary;
+
+  border-radius: 8px;
+  backdrop-filter: blur(5px);
+
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: $button-hover-bg;
+  }
 }
