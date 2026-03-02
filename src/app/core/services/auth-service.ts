@@ -7,6 +7,7 @@ export class AuthService {
   private tokenKey = 'token';
 
   login(username: string, password: string) {
+    debugger
     if (username && password) {
       localStorage.setItem(this.tokenKey, 'dummy-token');
       return true;
@@ -19,6 +20,7 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
+    debugger
     return !!localStorage.getItem(this.tokenKey);
   }
 
