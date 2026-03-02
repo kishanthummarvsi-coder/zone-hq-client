@@ -1,13 +1,23 @@
-<div class="layout-container">
-  <app-header></app-header>
+<mat-sidenav-container class="layout-container">
 
-  <div class="layout-body">
-    <app-sidebar></app-sidebar>
+    <!-- Sidebar -->
+    <mat-sidenav #sidenav class="sidebar" mode="side" [opened]="isExpanded">
+        <app-sidebar [isExpanded]="isExpanded">
+        </app-sidebar>
+    </mat-sidenav>
 
-    <div class="content">
-      <router-outlet></router-outlet>
-    </div>
-  </div>
+    <!-- Main Content Area -->
+    <mat-sidenav-content>
 
-  <app-footer></app-footer>
-</div>
+        <app-header (toggle)="toggleSidebar()">
+        </app-header>
+
+        <div class="content">
+            <router-outlet></router-outlet>
+        </div>
+
+        <app-footer></app-footer>
+
+    </mat-sidenav-content>
+
+</mat-sidenav-container>

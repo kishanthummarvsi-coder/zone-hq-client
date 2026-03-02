@@ -1,0 +1,32 @@
+:host {
+  display: block;
+  height: 100%;
+  background: #1e293b;
+  color: white;
+  width: 250px;
+}
+
+.logo-section {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.logo {
+  width: 140px;
+}
+
+.logo-mini {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+mat-nav-list a {
+  color: white;
+}
+
+mat-nav-list a.active {
+  background: rgba(255,255,255,0.1);
+}

@@ -4,7 +4,12 @@ import { HeaderComponent } from './components/header/header';
 import { SidebarComponent } from './components/sidebar/sidebar';
 import { FooterComponent } from './components/footer/footer';
 import { MainLayoutComponent } from './main-layout/main-layout';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -15,7 +20,12 @@ import { Router, RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    MatButtonModule
   ]
 })
 export class LayoutModule { }
