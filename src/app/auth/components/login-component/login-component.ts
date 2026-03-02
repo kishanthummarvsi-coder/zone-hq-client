@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     const success = this.authService.login(this.username, this.password);
 
     if (success) {
-      this.router.navigate(['/roles']);
+      this.router.navigate(['/users']);
     }
   }
 }
