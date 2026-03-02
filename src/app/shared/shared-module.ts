@@ -15,13 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    KanbanModule,
-    MatTableModule,
-    MatSortModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    MatButtonModule
+    KanbanModule
   ],
   exports: [
     KanbanModule,
