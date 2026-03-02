@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth-guard';
+import { MainLayoutComponent } from './layout/main-layout/main-layout';
 
 const routes: Routes = [
   {
@@ -15,19 +16,42 @@ const routes: Routes = [
         .then(m => m.AuthModule)
   },
   {
-    path: 'users',
-    canActivate: [AuthGuard],
-    loadChildren: () =>
-      import('./features/components/users/users-module')
-        .then(m => m.UsersModule)
+    path: '',
+    component: MainLayoutComponent,
+    canActivate: [AuthGuard], 
+    children: [
+
+      {
+        path: 'users',
+        loadChildren: () =>
+          import('./features/components/users/users-module')
+            .then(m => m.UsersModule)
+      },
+
+      {
+        path: 'roles',
+        loadChildren: () =>
+          import('./features/components/roles/roles-module')
+            .then(m => m.RolesModule)
+      }
+
+    ]
   },
-  {
-    path: 'roles',
-    canActivate: [AuthGuard],
-    loadChildren: () =>
-      import('./features/components/roles/roles-module')
-        .then(m => m.RolesModule)
-  },
+
+  // {
+  //   path: 'users',
+  //   canActivate: [AuthGuard],
+  //   loadChildren: () =>
+  //     import('./features/components/users/users-module')
+  //       .then(m => m.UsersModule)
+  // },
+  // {
+  //   path: 'roles',
+  //   canActivate: [AuthGuard],
+  //   loadChildren: () =>
+  //     import('./features/components/roles/roles-module')
+  //       .then(m => m.RolesModule)
+  // },
   { path: '**', redirectTo: 'auth/login' }
 ];
 
