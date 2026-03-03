@@ -1,8 +1,5 @@
 .pagination-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    // height: 55px;
+    padding: 16px;
 }
 
 .pagination-card {
@@ -14,8 +11,7 @@
     border-radius: 14px;
     background: #ffffff;
     box-sizing: border-box;
-    padding: 6px 16px;
-    height: 48px;
+    width: 100%;
 }
 
 .nav-section,
