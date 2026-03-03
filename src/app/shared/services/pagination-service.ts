@@ -49,16 +49,28 @@ export class PaginationService {
     this.state.pageNumber = 1;
     this.emit();
   }
-  
-  updateSort(sortField: any, sortDirection: any) {
-    throw new Error('Method not implemented.');
+
+  updateSort(sortField: string, sortDirection: 'asc' | 'desc') {
+
+    if (this.state.sortField === sortField) {
+      this.state.sortDirection =
+        this.state.sortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.state.sortField = sortField;
+      this.state.sortDirection = sortDirection || 'asc';
+    }
+
+    this.state.pageNumber = 1; // reset to first page on sort
+    this.emit();
   }
 
   private emit() {
     this.stateSubject.next({
       pageNumber: this.state.pageNumber,
       pageSize: this.state.pageSize,
-      search: this.searchTerm
+      search: this.searchTerm,
+      sortField: this.state.sortField,
+      sortDirection: this.state.sortDirection
     });
   }
 

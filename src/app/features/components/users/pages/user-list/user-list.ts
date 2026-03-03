@@ -74,6 +74,7 @@ export class UserList implements OnInit {
   };
 
   onSortChange(event: any) {
+    console.log("sort clicked")
     this.paginationService.updateSort(
       event.sortField,
       event.sortDirection
