@@ -1,17 +1,76 @@
 .table-container {
   width: 100%;
-}
-
-.table-header {
-  margin-bottom: 16px;
-  display: flex;
-  justify-content: space-between;
+  padding: 16px;
 }
 
 .table-wrapper {
   overflow: auto;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
+/* Table */
 table {
   width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 14px;
+}
+
+/* Sticky Header */
+th.mat-header-cell {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #fafafa;
+  font-weight: 600;
+  color: #333;
+  padding: 14px 16px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+/* Cells */
+td.mat-cell {
+  padding: 14px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  color: #444;
+}
+
+/* Row Hover Effect */
+tr.mat-row:hover {
+  background-color: #f9fbff;
+  transition: background 0.2s ease-in-out;
+}
+
+/* Actions Column Alignment */
+td.mat-cell:last-child,
+th.mat-header-cell:last-child {
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Action Buttons Spacing */
+td.mat-cell button {
+  margin: 0 4px;
+}
+
+/* Optional: Make icons slightly smaller & clean */
+mat-icon {
+  font-size: 20px;
+}
+
+/* Scrollbar Styling (modern look) */
+.table-wrapper::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+  background: #d0d0d0;
+  border-radius: 10px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #b5b5b5;
 }
