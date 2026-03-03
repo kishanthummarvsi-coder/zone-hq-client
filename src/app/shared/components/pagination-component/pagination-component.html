@@ -1,25 +1,30 @@
-<mat-card class="pagination-card" *ngIf="totalCount > 0">
+<div class="pagination-wrapper">
 
-    <div class="pagination-wrapper">
+    <mat-card class="pagination-card" *ngIf="totalCount > 0">
+        <div class="nav-section">
 
-        <div class="pagination-left">
-            <button mat-stroked-button (click)="prev()" [disabled]="paginationService.pageNumber === 1">
-                Previous
+            <button mat-icon-button (click)="prev()" [disabled]="paginationService.pageNumber === 1">
+                <mat-icon>chevron_left</mat-icon>
             </button>
 
-            <span class="page-info">
-                Page {{ paginationService.pageNumber }} of {{ totalPages }}
-            </span>
+            <div class="page-display">
+                <span class="current-page">
+                    {{ paginationService.pageNumber }}
+                </span>
+                <span class="divider">/</span>
+                <span class="total-pages">
+                    {{ totalPages }}
+                </span>
+            </div>
 
-            <button mat-stroked-button (click)="next()" [disabled]="paginationService.pageNumber === totalPages">
-                Next
+            <button mat-icon-button (click)="next()" [disabled]="paginationService.pageNumber === totalPages">
+                <mat-icon>chevron_right</mat-icon>
             </button>
         </div>
 
-        <div class="pagination-right">
+        <div class="control-section">
 
-            <mat-form-field appearance="outline" class="page-size-field">
-                <mat-label>Page Size</mat-label>
+            <mat-form-field appearance="fill" class="size-field">
                 <mat-select [value]="paginationService.pageSize" (selectionChange)="changePageSize($event.value)">
                     <mat-option *ngFor="let size of [5,10,20,50,100]" [value]="size">
                         {{ size }}
@@ -27,18 +32,16 @@
                 </mat-select>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" class="goto-field">
-                <mat-label>Go to</mat-label>
-                <input matInput #gotoInput type="number" min="1" [max]="totalPages"
+            <mat-form-field appearance="fill" class="goto-field">
+                <input matInput #gotoInput type="number" min="1" [max]="totalPages" placeholder="Go"
                     (keyup.enter)="goToPage(+gotoInput.value)">
             </mat-form-field>
 
-            <button mat-flat-button color="primary" (click)="goToPage(+gotoInput.value)">
-                Go
+            <button mat-icon-button color="primary" (click)="goToPage(+gotoInput.value)">
+                <mat-icon>arrow_forward</mat-icon>
             </button>
 
         </div>
 
-    </div>
-
-</mat-card>
+    </mat-card>
+</div>

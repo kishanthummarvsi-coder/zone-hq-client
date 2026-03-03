@@ -1,47 +1,58 @@
-.pagination-card {
-  margin-top: 16px;
-  border-radius: 14px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  padding: 16px 20px;
-}
-
 .pagination-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 16px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    // height: 55px;
 }
 
-.pagination-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.pagination-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    border-radius: 14px;
+    background: #ffffff;
+    box-sizing: border-box;
+    padding: 6px 16px;
+    height: 48px;
 }
 
-.page-info {
-  font-weight: 500;
-  color: #555;
+.nav-section,
+.control-section {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-.pagination-right {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+.page-display {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    vertical-align: middle;
+    gap: 6px;
 }
 
-.page-size-field,
+.current-page,
+.total-pages {
+    font-weight: 600;
+    color: #555;
+}
+
+.divider {
+    color: #aaa;
+}
+.control-section{
+    height: 25px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    vertical-align: middle;
+    
+}
+
+.size-field,
 .goto-field {
-  width: 120px;
-}
-
-/* Make inputs compact */
-.mat-mdc-form-field {
-  font-size: 13px;
-}
-
-/* Button rounding */
-button[mat-stroked-button],
-button[mat-flat-button] {
-  border-radius: 8px;
+    width: 65px;
 }
