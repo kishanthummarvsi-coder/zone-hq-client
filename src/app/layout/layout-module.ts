@@ -19,8 +19,8 @@ import { MatButtonModule } from '@angular/material/button';
     MainLayoutComponent
   ],
   imports: [
-    RouterModule,
     CommonModule,
+    RouterModule,
     MatToolbarModule,
     MatSidenavModule,
     MatIconModule,

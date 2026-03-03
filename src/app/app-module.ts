@@ -5,8 +5,7 @@ import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './core/interceptors/auth-interceptor';
-import { CommonModule } from '@angular/common';
-import { LayoutModule } from '@angular/cdk/layout';
+import { LayoutModule } from './layout/layout-module';
 
 @NgModule({
   declarations: [
