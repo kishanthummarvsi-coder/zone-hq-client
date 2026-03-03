@@ -6,12 +6,14 @@ import { Observable } from 'rxjs';
 import { PagedResponse } from '../../../../../shared/models/pagination/paged-response.model';
 import { UserService } from '../../../../services/user-service';
 import { User } from '../../../../models/users/user.model';
+import { PaginationService } from '../../../../../shared/services/pagination-service';
 
 @Component({
   selector: 'app-user-list',
   standalone: false,
   templateUrl: './user-list.html',
   styleUrl: './user-list.scss',
+  providers: [PaginationService]
 })
 export class UserList implements OnInit {
 
@@ -24,7 +26,7 @@ export class UserList implements OnInit {
     { key: 'status', label: 'Status', sortable: false }
   ];
 
- request: PagedRequest = {
+  request: PagedRequest = {
     pageNumber: 1,
     pageSize: 10,
     search: '',
@@ -32,21 +34,41 @@ export class UserList implements OnInit {
     sortDirection: 'asc'
   };
 
+  users: User[] = [];
   totalCount = 0;
+  loading = false;
 
   constructor(
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    public paginationService: PaginationService
   ) { }
 
   ngOnInit(): void {
-    this.loadUsers();
-  }
+console.log("user list init");
+    this.paginationService.state$.subscribe((request: PagedRequest) => {
+      console.log("go for fetch users");
+      this.loadUsers(request);
+      console.log("fetched users");
+    });
 
-  loadUsers() {
-    this.userService.getUsers(this.request)
-      .subscribe((response: PagedResponse<User>) => {
-        this.totalCount = response.totalRecords;
+    this.paginationService.init();
+  }
+  private loadUsers(request: PagedRequest) {
+    this.loading = true;
+
+    this.userService.getUsers(request)
+      .subscribe({
+        next: (response: PagedResponse<User>) => {
+          this.users = response.data;
+          this.totalCount = response.totalRecords;
+
+          this.paginationService.updateTotalCount(response.totalRecords);
+          this.loading = false;
+        },
+        error: () => {
+          this.loading = false;
+        }
       });
   }
 
@@ -54,23 +76,23 @@ export class UserList implements OnInit {
     return this.userService.getUsers(this.request);
   };
 
-  onPageChange(event: any) {
-    this.request.pageNumber = event.pageNumber;
-    this.request.pageSize = event.pageSize;
-    this.loadUsers();
-  }
+  // onPageChange(event: any) {
+  //   this.request.pageNumber = event.pageNumber;
+  //   this.request.pageSize = event.pageSize;
+  //   this.loadUsers();
+  // }
 
-  onSortChange(event: any) {
-    this.request.sortField = event.sortField;
-    this.request.sortDirection = event.sortDirection;
-    this.loadUsers();
-  }
+  // onSortChange(event: any) {
+  //   this.request.sortField = event.sortField;
+  //   this.request.sortDirection = event.sortDirection;
+  //   this.loadUsers();
+  // }
 
-  onSearch(searchText: string) {
-    this.request.search = searchText;
-    this.request.pageNumber = 1; 
-    this.loadUsers();
-  }
+  // onSearch(searchText: string) {
+  //   this.request.search = searchText;
+  //   this.request.pageNumber = 1;
+  //   this.loadUsers();
+  // }
 
   onEdit(user: User) {
     console.log('edit user', user);

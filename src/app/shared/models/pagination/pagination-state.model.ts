@@ -4,4 +4,5 @@ export interface PaginationState {
   search: string;
   sortField: string;
   sortDirection: 'asc' | 'desc';
+  totalCount: number;
 }

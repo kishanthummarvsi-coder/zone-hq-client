@@ -1,0 +1,15 @@
+<div class="pagination-container" *ngIf="totalCount > 0">
+
+    <button (click)="prev()" [disabled]="paginationService.pageNumber === 1">
+        Prev
+    </button>
+
+    <span>
+        Page {{ paginationService.pageNumber }} of {{ totalPages }}
+    </span>
+
+    <button (click)="next()" [disabled]="paginationService.pageNumber === totalPages">
+        Next
+    </button>
+
+</div>

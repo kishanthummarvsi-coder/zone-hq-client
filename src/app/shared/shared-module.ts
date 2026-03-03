@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PaginationComponent } from './components/pagination-component/pagination-component';
 
 @NgModule({
   imports: [
@@ -25,10 +26,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   exports: [
     KanbanModule,
-    DynamicTable
+    DynamicTable,
+    PaginationComponent
   ],
   declarations: [
-    DynamicTable
+    DynamicTable,
+    PaginationComponent
   ]
 })
 export class SharedModule { }
