@@ -13,22 +13,42 @@ export class PaginationComponent {
   constructor(public paginationService: PaginationService) { }
 
   get totalPages(): number {
-    return Math.ceil(this.totalCount / this.paginationService.pageSize);
+    return this.totalCount > 0
+      ? Math.ceil(this.totalCount / this.paginationService.pageSize)
+      : 0;
   }
 
-  next() {
+  next(): void {
     if (this.paginationService.pageNumber < this.totalPages) {
-      this.paginationService.updatePage(this.paginationService.pageNumber + 1);
+      this.paginationService.updatePage(
+        this.paginationService.pageNumber + 1
+      );
     }
   }
 
-  prev() {
+  prev(): void {
     if (this.paginationService.pageNumber > 1) {
-      this.paginationService.updatePage(this.paginationService.pageNumber - 1);
+      this.paginationService.updatePage(
+        this.paginationService.pageNumber - 1
+      );
     }
   }
 
-  goTo(page: number) {
-    this.paginationService.updatePage(page);
+ goToPage(page: number): void {
+    const pageNumber = Number(page);
+
+    if (
+      pageNumber >= 1 &&
+      pageNumber <= this.totalPages &&
+      !isNaN(pageNumber)
+    ) {
+      this.paginationService.updatePage(pageNumber);
+    }
+  }
+
+  changePageSize(size: number): void {
+    this.paginationService.setPageSize(size);
+
+    this.paginationService.updatePage(1);
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { PaginationState } from '../models/pagination/pagination-state.model';
 import { BehaviorSubject } from 'rxjs';
+import { PaginationState } from '../models/pagination/pagination-state.model';
 import { PagedRequest } from '../models/pagination/paged-request.model';
 
 @Injectable()
@@ -15,74 +15,96 @@ export class PaginationService {
     sortDirection: 'asc',
   };
 
-  private searchTerm: string = '';
-
   private stateSubject = new BehaviorSubject<PagedRequest>({
     pageNumber: 1,
     pageSize: 10,
-    search: ''
+    search: '',
+    sortField: '',
+    sortDirection: 'asc'
   });
 
   state$ = this.stateSubject.asObservable();
 
-  init() {
+  /* ===============================
+     Initialization
+  =============================== */
+
+  init(): void {
     this.emit();
   }
 
-  updatePage(pageNumber: number) {
+  /* ===============================
+     Pagination
+  =============================== */
+
+  updatePage(pageNumber: number): void {
     this.state.pageNumber = pageNumber;
     this.emit();
   }
 
-  updatePageSize(pageSize: number) {
+  setPageSize(pageSize: number): void {
     this.state.pageSize = pageSize;
-    this.state.pageNumber = 1;
+    this.state.pageNumber = 1; // reset
     this.emit();
   }
 
-  updateTotalCount(total: number) {
+  updateTotalCount(total: number): void {
     this.state.totalCount = total;
   }
 
-  updateSearch(search: string) {
-    this.searchTerm = search;
+  /* ===============================
+     Search
+  =============================== */
+
+  updateSearch(search: string): void {
+    this.state.search = search;
     this.state.pageNumber = 1;
     this.emit();
   }
 
-  updateSort(sortField: string, sortDirection: 'asc' | 'desc') {
+  /* ===============================
+     Sorting
+  =============================== */
 
-    if (this.state.sortField === sortField) {
-      this.state.sortDirection =
-        this.state.sortDirection === 'asc' ? 'desc' : 'asc';
-    } else {
-      this.state.sortField = sortField;
-      this.state.sortDirection = sortDirection || 'asc';
-    }
+  updateSort(
+    sortField: string,
+    sortDirection: 'asc' | 'desc'
+  ): void {
 
-    this.state.pageNumber = 1; // reset to first page on sort
+    this.state.sortField = sortField;
+    this.state.sortDirection = sortDirection || 'asc';
+    this.state.pageNumber = 1;
+
     this.emit();
   }
 
-  private emit() {
+  /* ===============================
+     Emit State
+  =============================== */
+
+  private emit(): void {
     this.stateSubject.next({
       pageNumber: this.state.pageNumber,
       pageSize: this.state.pageSize,
-      search: this.searchTerm,
+      search: this.state.search,
       sortField: this.state.sortField,
       sortDirection: this.state.sortDirection
     });
   }
 
-  get totalCount() {
+  /* ===============================
+     Getters
+  =============================== */
+
+  get totalCount(): number {
     return this.state.totalCount;
   }
 
-  get pageNumber() {
+  get pageNumber(): number {
     return this.state.pageNumber;
   }
 
-  get pageSize() {
+  get pageSize(): number {
     return this.state.pageSize;
   }
 }

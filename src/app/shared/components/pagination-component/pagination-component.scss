@@ -1,0 +1,47 @@
+.pagination-card {
+  margin-top: 16px;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  padding: 16px 20px;
+}
+
+.pagination-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.pagination-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.page-info {
+  font-weight: 500;
+  color: #555;
+}
+
+.pagination-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.page-size-field,
+.goto-field {
+  width: 120px;
+}
+
+/* Make inputs compact */
+.mat-mdc-form-field {
+  font-size: 13px;
+}
+
+/* Button rounding */
+button[mat-stroked-button],
+button[mat-flat-button] {
+  border-radius: 8px;
+}
