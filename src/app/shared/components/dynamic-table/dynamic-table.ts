@@ -3,6 +3,7 @@ import { TableColumn } from '../../models/dynamic-table/table-column.model';
 import { debounceTime, distinctUntilChanged, Observable } from 'rxjs';
 import { MatSort, Sort } from '@angular/material/sort';
 import { FormControl } from '@angular/forms';
+import { PagedResponse } from '../../models/pagination/paged-response.model';
 
 @Component({
   selector: 'app-dynamic-table',
@@ -15,7 +16,7 @@ export class DynamicTable<T> implements OnInit, AfterViewInit {
   @Output() delete = new EventEmitter<T>();
 
   @Input() columns: TableColumn[] = [];
-  @Input() fetchFn!: () => Observable<T[]>;
+  @Input() fetchFn!: () => Observable<PagedResponse<any>>;
   @Input() showActions = false;
 
   @ViewChild(MatSort) sort!: MatSort;
@@ -39,21 +40,28 @@ export class DynamicTable<T> implements OnInit, AfterViewInit {
     this.setupSorting();
   }
 
-  private loadData() {
-    if (!this.fetchFn) return;
+private loadData() {
+  if (!this.fetchFn) return;
 
-    this.loading = true;
+  this.loading = true;
 
-    this.fetchFn().subscribe({
-      next: (response) => {
+  this.fetchFn().subscribe({
+    next: (response) => {
+
+      if (response?.data) {
+        this.data = response.data;
+      } 
+      else if (Array.isArray(response)) {
         this.data = response;
-        this.loading = false;
-      },
-      error: () => {
-        this.loading = false;
       }
-    });
-  }
+
+      this.loading = false;
+    },
+    error: () => {
+      this.loading = false;
+    }
+  });
+}
 
   private setupSorting() {
     this.sort.sortChange.subscribe((sort: Sort) => {
@@ -69,5 +77,5 @@ export class DynamicTable<T> implements OnInit, AfterViewInit {
       });
     });
   }
- 
+
 }

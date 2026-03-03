@@ -15,10 +15,6 @@ export class UserService {
 
   constructor(private http: HttpClient) { this.generateDummyUsers(); }
 
-  getAll(): Observable<User[]> {
-    return of(this.users);
-  }
-
   getUsers(request: PagedRequest): Observable<PagedResponse<User>> {
 
     let data = [...this.users];

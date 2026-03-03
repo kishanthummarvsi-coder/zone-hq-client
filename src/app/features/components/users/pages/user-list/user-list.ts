@@ -24,9 +24,12 @@ export class UserList implements OnInit {
     { key: 'status', label: 'Status', sortable: false }
   ];
 
-  request: PagedRequest = {
+ request: PagedRequest = {
     pageNumber: 1,
-    pageSize: 5
+    pageSize: 10,
+    search: '',
+    sortField: '',
+    sortDirection: 'asc'
   };
 
   totalCount = 0;
@@ -36,15 +39,37 @@ export class UserList implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.loadUsers();
+  }
 
-  fetchUsers = (): Observable<User[]> => {
-    return this.userService.getAll();
+  loadUsers() {
+    this.userService.getUsers(this.request)
+      .subscribe((response: PagedResponse<User>) => {
+        this.totalCount = response.totalRecords;
+      });
+  }
+
+  fetchUsers = (): Observable<PagedResponse<User>> => {
+    return this.userService.getUsers(this.request);
   };
 
   onPageChange(event: any) {
     this.request.pageNumber = event.pageNumber;
     this.request.pageSize = event.pageSize;
+    this.loadUsers();
+  }
+
+  onSortChange(event: any) {
+    this.request.sortField = event.sortField;
+    this.request.sortDirection = event.sortDirection;
+    this.loadUsers();
+  }
+
+  onSearch(searchText: string) {
+    this.request.search = searchText;
+    this.request.pageNumber = 1; 
+    this.loadUsers();
   }
 
   onEdit(user: User) {
