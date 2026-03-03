@@ -26,7 +26,6 @@ export class PaginationService {
   state$ = this.stateSubject.asObservable();
 
   init() {
-    console.log("Pagination initated")
     this.emit();
   }
 
@@ -49,6 +48,10 @@ export class PaginationService {
     this.searchTerm = search;
     this.state.pageNumber = 1;
     this.emit();
+  }
+  
+  updateSort(sortField: any, sortDirection: any) {
+    throw new Error('Method not implemented.');
   }
 
   private emit() {

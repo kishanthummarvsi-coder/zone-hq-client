@@ -1,9 +1,6 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { TableColumn } from '../../models/dynamic-table/table-column.model';
-import { debounceTime, distinctUntilChanged, Observable } from 'rxjs';
 import { MatSort, Sort } from '@angular/material/sort';
-import { FormControl } from '@angular/forms';
-import { PagedResponse } from '../../models/pagination/paged-response.model';
 
 @Component({
   selector: 'app-dynamic-table',
@@ -11,71 +8,52 @@ import { PagedResponse } from '../../models/pagination/paged-response.model';
   templateUrl: './dynamic-table.html',
   styleUrl: './dynamic-table.scss'
 })
-export class DynamicTable<T> implements OnInit, AfterViewInit {
-  @Output() edit = new EventEmitter<T>();
-  @Output() delete = new EventEmitter<T>();
+export class DynamicTable<T> implements OnChanges, AfterViewInit {
 
   @Input() columns: TableColumn[] = [];
-  @Input() fetchFn!: () => Observable<PagedResponse<any>>;
+  @Input() data: T[] = [];
+  @Input() loading = false;
   @Input() showActions = false;
+
+  @Output() edit = new EventEmitter<T>();
+  @Output() delete = new EventEmitter<T>();
+  @Output() sortChange = new EventEmitter<{
+    sortField: string;
+    sortDirection: 'asc' | 'desc';
+  }>();
 
   @ViewChild(MatSort) sort!: MatSort;
 
-  data: T[] = [];
   displayedColumns: string[] = [];
 
-  loading = false;
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['columns']) {
+      this.displayedColumns = this.columns.map(c => c.key);
 
-  ngOnInit(): void {
-    this.displayedColumns = this.columns.map(c => c.key);
-
-    if (this.showActions) {
-      this.displayedColumns.push('actions');
+      if (this.showActions) {
+        this.displayedColumns.push('actions');
+      }
     }
-
-    this.loadData();
   }
 
   ngAfterViewInit(): void {
-    this.setupSorting();
-  }
+    if (this.sort) {
+      this.sort.sortChange.subscribe((sort: Sort) => {
+        if (!sort.direction) return;
 
-private loadData() {
-  if (!this.fetchFn) return;
-
-  this.loading = true;
-
-  this.fetchFn().subscribe({
-    next: (response) => {
-
-      if (response?.data) {
-        this.data = response.data;
-      } 
-      else if (Array.isArray(response)) {
-        this.data = response;
-      }
-
-      this.loading = false;
-    },
-    error: () => {
-      this.loading = false;
-    }
-  });
-}
-
-  private setupSorting() {
-    this.sort.sortChange.subscribe((sort: Sort) => {
-      if (!sort.direction) return;
-
-      this.data = [...this.data].sort((a: any, b: any) => {
-        const valueA = a[sort.active];
-        const valueB = b[sort.active];
-
-        if (valueA < valueB) return sort.direction === 'asc' ? -1 : 1;
-        if (valueA > valueB) return sort.direction === 'asc' ? 1 : -1;
-        return 0;
+        this.sortChange.emit({
+          sortField: sort.active,
+          sortDirection: sort.direction as 'asc' | 'desc'
+        });
       });
-    });
+    }
   }
 
+  onEdit(row: T) {
+    this.edit.emit(row);
+  }
+
+  onDelete(row: T) {
+    this.delete.emit(row);
+  }
 }

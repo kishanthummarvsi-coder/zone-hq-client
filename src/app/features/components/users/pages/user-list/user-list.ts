@@ -45,11 +45,8 @@ export class UserList implements OnInit {
   ) { }
 
   ngOnInit(): void {
-console.log("user list init");
     this.paginationService.state$.subscribe((request: PagedRequest) => {
-      console.log("go for fetch users");
       this.loadUsers(request);
-      console.log("fetched users");
     });
 
     this.paginationService.init();
@@ -76,23 +73,12 @@ console.log("user list init");
     return this.userService.getUsers(this.request);
   };
 
-  // onPageChange(event: any) {
-  //   this.request.pageNumber = event.pageNumber;
-  //   this.request.pageSize = event.pageSize;
-  //   this.loadUsers();
-  // }
-
-  // onSortChange(event: any) {
-  //   this.request.sortField = event.sortField;
-  //   this.request.sortDirection = event.sortDirection;
-  //   this.loadUsers();
-  // }
-
-  // onSearch(searchText: string) {
-  //   this.request.search = searchText;
-  //   this.request.pageNumber = 1;
-  //   this.loadUsers();
-  // }
+  onSortChange(event: any) {
+    this.paginationService.updateSort(
+      event.sortField,
+      event.sortDirection
+    );
+  }
 
   onEdit(user: User) {
     console.log('edit user', user);

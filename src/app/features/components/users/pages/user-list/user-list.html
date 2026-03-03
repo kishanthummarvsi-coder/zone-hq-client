@@ -1,10 +1,13 @@
-<div class="containetr">
-  <app-dynamic-table [columns]="columns" [fetchFn]="fetchUsers" [showActions]="true" (edit)="onEdit($event)"
-    (delete)="onDelete($event)">
-  </app-dynamic-table>
-</div>
+<app-dynamic-table
+  [columns]="columns"
+  [data]="users"
+  [loading]="loading"
+  [showActions]="true"
+  (sortChange)="onSortChange($event)"
+  (edit)="onEdit($event)"
+  (delete)="onDelete($event)">
+</app-dynamic-table>
 
-<div class="pagination-container">
-  <app-pagination-component 
-  [totalCount]="totalCount"></app-pagination-component>
-</div>
+<app-pagination-component
+  [totalCount]="totalCount">
+</app-pagination-component>
