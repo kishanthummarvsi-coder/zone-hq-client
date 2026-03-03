@@ -4,4 +4,5 @@ export interface PagedRequest {
   search?: string;
   sortField?: string;
   sortDirection?: 'asc' | 'desc';
+  filters?: Record<string, any>; 
 }
